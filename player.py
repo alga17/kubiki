@@ -1,3 +1,4 @@
+import random
 class Cube(object):
   def __init__(self, up=None):
     self.up = up
