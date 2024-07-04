@@ -5,7 +5,7 @@ class Cube(object):
 
   def roll(self):
     sides = ['tank', 'deathray', 'deathray', 'human', 'cow', 'chicken']
-    self.side = sides
+    self.up = sides
 
   def __repr__(self):
     return str(self.up)
@@ -51,3 +51,25 @@ class Player(object):
             self.saved.append(d)
         self.dice[:] = (value for value in self.dice if value.up != 'deathray')
         valid_choice = True
+
+  def take_turn(self):
+    self.dice = [Cube() for x in range(0, 13)]
+    self.tanks = []
+    self.saved = []
+    while self.dice:
+      for d in self.dice:
+        d.roll()
+      for index, d in enumerate(self.dice):
+        if d.up == 'tank':
+          self.tanks.append(d)
+      # Now remove all the tanks
+      self.dice[:] = (value for value in self.dice if value.up != 'tank')
+      print('Rolled: %s' % self.dice)
+      print('Saved: %s' % self.saved)
+      print('Tanks: %s' % self.tanks)
+      self.pick()
+    self.score_dice()
+
+  def main():
+    steve = Player('Steve')
+    steve.take_turn()

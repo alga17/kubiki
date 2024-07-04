@@ -11,7 +11,6 @@ def test_repr():
     assert type(c) == Cube
 
 def test_load():
-    x = Cube('tank')
-    x = x.load('tank')
-    assert x.side == 'tank'
+    x = Cube.load('tank')
+    assert x.up == 'tank'
 
